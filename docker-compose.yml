@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+
+  app.api:
+    image: ${REGISTRY:-mp}/app.api:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: src/App.API/Dockerfile
+
+  app.web:
+    image: ${REGISTRY:-mp}/app.web:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: src/App.Web/Dockerfile
+    depends_on:
+      - app.api
